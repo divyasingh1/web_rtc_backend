@@ -6,9 +6,6 @@ var UserService = require('./UserService');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-var UserModel = require('./UserModel');
-
-
 router.post('/', function (req, res) {
     res.send({ "status": "SUCCESS"});
 });
@@ -35,7 +32,7 @@ router.post('/authenticate', function (req, res) {
             res.send(sessionData);
         })
         .catch((err) => {
-            res.status(400).send({ status: "Failed" });
+            res.status(401).send({ status: "Failed" });
         });
 });
 
