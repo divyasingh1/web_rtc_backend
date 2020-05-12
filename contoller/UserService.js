@@ -60,7 +60,7 @@ class UserService {
     }
 
     jwtEncode(data) {
-        return Promise.resolve(jwt.sign(data, "secretKey").toString());
+        return Promise.resolve(jwt.sign(data, "secretkey").toString());
     }
 
     loginUser({email, password}){

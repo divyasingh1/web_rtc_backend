@@ -2,11 +2,15 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 app.use(cors());
+var {auth} = require('./auth_middleware/auth')
 var db = require('./db');
 
 var userContoller = require('./contoller/UserController');
-app.use('/api', userContoller);
+var authContoller = require('./contoller/AuthController');
 
-//routes
+app.use('/api', userContoller);
+app.use(auth);
+app.use('/api/user', authContoller);
+
 
 module.exports = app;

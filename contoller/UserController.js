@@ -6,7 +6,8 @@ var UserService = require('./UserService');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.post('/', function (req, res) {
+//test
+router.post('/test', function (req, res) {
     res.send({ "status": "SUCCESS"});
 });
 
