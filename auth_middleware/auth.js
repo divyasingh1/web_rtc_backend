@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 
-function auth(req,res,next) {
+function auth(req, res, next) {
     var token;
     if (req.headers['authorization']) {
         var authString = req.headers['authorization'];
@@ -16,9 +16,13 @@ function auth(req,res,next) {
     try {
         var user = jwt.verify(token, 'secretkey');
         if (user) {
-            req.user = user;
-            req.userId = user._id;
-            return next();
+            if (user.roles.includes('user')) {
+                req.user = user;
+                req.userId = user._id;
+                return next();
+            } else {
+                return res.status(401).send("Access denied");
+            }
         }
         return res.status(401).send("Access denied");
     } catch (err) {

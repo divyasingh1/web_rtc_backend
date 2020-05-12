@@ -47,7 +47,8 @@ class UserService {
         });
         var token = await this.jwtEncode({
             _id: user._id,
-            sessionId
+            sessionId,
+            roles: ['user']
         });
         return {
             token,
@@ -96,7 +97,7 @@ class UserService {
     async createNewSession(user){
         var token =  await this.jwtEncode({
             _id: user._id,
-            roles : user.roles
+            roles : user.roles || ['user']
             // sessionId 
         })
         return {
