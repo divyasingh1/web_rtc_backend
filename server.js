@@ -21,7 +21,6 @@ io.on('connection', function (socket) {
             socket.join(room);
             socket.emit('created', room);
         } else if (numClients == 1) {
-            console.log(">>>>>joined");
             socket.join(room);
             socket.emit('joined', room);
         } else {
@@ -30,22 +29,18 @@ io.on('connection', function (socket) {
     });
 
     socket.on('ready', function (room){
-        console.log(">>>>>ready");
         socket.broadcast.to(room).emit('ready');
     });
 
     socket.on('candidate', function (event){
-        console.log(">>>>>candidate");
         socket.broadcast.to(event.room).emit('candidate', event);
     });
 
     socket.on('offer', function(event){
-        console.log(">>>>>offer");
         socket.broadcast.to(event.room).emit('offer',event.sdp);
     });
 
     socket.on('answer', function(event){
-        console.log(">>>>>answer");
         socket.broadcast.to(event.room).emit('answer',event.sdp);
     });
 
